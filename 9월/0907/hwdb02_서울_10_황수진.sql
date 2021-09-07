@@ -9,7 +9,11 @@ where d.loc = "CHICAGO";
 # 2
 select empno, ename, job, deptno
 from emp
-where mgr is null;
+where empno not in (
+					select mgr
+                    from emp
+					where mgr is not null
+                    );
 
 # 3
 select ename, job, mgr
@@ -18,7 +22,8 @@ where mgr = (
 				select mgr
 				from emp
 				where ename = 'BLAKE'
-                );
+                )
+and ename != 'BLAKE';
                 
 # 4
 select *
@@ -34,5 +39,3 @@ where mgr = (
 				from emp
                 where ename = 'JONES'
                 );
-select*
-from emp;
